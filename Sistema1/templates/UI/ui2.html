@@ -1,0 +1,36 @@
+{% extends "Ui\base.html" %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/ui2.css' %}">
+
+<div class="container">
+    <div class="dashboard">
+        <div class="card blue">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTNEmyi5RW_W9CFEnxU6F-kLQHuVObh_0GpA&s" alt="">
+            <p>PROGRAMA PEQUEÑAS LOCALIDADE</p>
+            <br>
+            <a href="{% url 'ui3' %}">mas informacion <span>&#x2192;</span></a>
+        </div>
+        <div class="card green">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLMzqqY4wc3SskbSsZWxKuUbOFTJw_jSRMEg&s" alt="">
+            <p>PROGRAMA BARRIOS</p>
+            <a href="{% url 'ui4' %}">mas informacion <span>&#x2192;</span></a>
+        </div>
+        <div class="card yellow">
+            <img  style="width: 325px; height: 325px;" src="https://www.malaespinacheck.cl/wp-content/uploads/2023/08/La%CC%81minas-ME-2023-08-09T180445.983.png" alt="">
+            <p>PROGRAMA ASENNTAMIENTOS PRECARIOS</p>
+            <br>
+            <a href="#">mas informacion <span>&#x2192;</span></a>
+        </div>
+        
+    </div>
+</div>
+
+<hr>
+<h1>Administrative Dashboard</h1>
+
+
+
+
+{% endblock %} 
