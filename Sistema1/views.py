@@ -77,18 +77,23 @@ def ver_convenio(request, nombre_archivo):
         return FileResponse(open(ruta_convenios, 'rb'), content_type='application/pdf')
     else:
         raise Http404("Archivo no encontrado")
+    
 
-
-
-   
-   # Form_Municipal = MunicipioForm()
-   # if request.method == "POST":
-   #    Form_Municipal = MunicipioForm(request.POST)
-   #    if Form_Municipal.is_valid():
-   #       Form_Municipal.save()
-   #       return Ui3(request)
-   # data = {"form":Form_Municipal}
-
+def Actualizar_Municipio(request,id):
+    municipio = get_object_or_404(Municipios, id=id)
+    if request.method == "POST":
+       municipio.nombre = request.POST.get('nombre')
+       municipio.rut = request.POST.get('rut')
+       municipio.cuenta = request.POST.get('cuenta')
+       municipio.save()
+       return redirect('listar')  # Redirige a la lista de municipios
+    data = {'municipio': municipio}
+    return render(request, 'UI\Actulizar_Mun.html',data)    
+    
+def Eliminar_Municipio(request, id):
+    municipio = get_object_or_404(Municipios, id=id)
+    municipio.delete()
+    return redirect('listar')  # Redirige a la lista de municipios
    
 
 
@@ -101,3 +106,31 @@ def base(request):
 def exit(request):
    logout(request)
    return redirect('Ui2')
+
+
+
+
+
+'''  
+def actualizar_Municipio(request, id):
+    empleado = Municipios.objects.get(id = id)
+    form = MunicipioForm(instance=empleado)
+    if request.method == 'POST':                           
+        form = MunicipioForm(request.POST, instance=empleado)
+        if form.is_valid():
+            form.save()
+        return Ui3(request)
+    data = {'form' : form}
+    return render(request, 'kozanApp/Actualizar_Mun.html', data)
+'''
+
+
+'''
+   Form_Municipal = MunicipioForm()
+   if request.method == "POST":
+      Form_Municipal = MunicipioForm(request.POST)
+      if Form_Municipal.is_valid():
+         Form_Municipal.save()
+         return Ui3(request)
+   data = {"form":Form_Municipal}
+'''

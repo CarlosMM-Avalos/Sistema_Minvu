@@ -48,7 +48,7 @@
             <td>{{ m.cuenta }}</td>
             <p>{{ municipio.nombre }}</p>
             <td> <a class="button" href="{% url 'md' id=m.id %}">Detalles</a></td>
-            <td> <a class="" href="">Editar</a>/<a class="" href="">Borrar</a></td>
+            <td> <a href="{% url 'actualizar_Mun' id=m.id  %}">Editar</a>/<a href="{% url 'delete_mun' id=m.id  %}">eliminar</a></td>
         </tr>
         {% endfor %}
         {% else %}

@@ -1,0 +1,16 @@
+{% extends "Ui/base.html" %}
+{% load static %}
+
+{% block content %}
+<h3>Actualizar Municipio</h3>
+<form method="POST">
+   {% csrf_token %}
+   <label>Nombre:</label>
+   <input type="text" name="nombre" value="{{ municipio.nombre }}" required><br>
+   <label>RUT:</label>
+   <input type="text" name="rut" value="{{ municipio.rut }}" required><br>
+   <label>Cuenta:</label>
+   <input type="text" name="cuenta" value="{{ municipio.cuenta }}" required><br>
+   <button type="submit">Guardar cambios</button>
+</form>
+{% endblock %}

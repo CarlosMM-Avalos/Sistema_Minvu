@@ -10,10 +10,13 @@ urlpatterns = [
     path('ui1/',views.Inicio, name = "Ui1"),
     path('ui3/',views.Listar_Municipios, name = "ui3"),
     path('addConv/',views.Agregar_Convenios, name = "addConv"),
-    path('detailsMun/<int:id>/', views.detalles_Municipio, name="md"),
     path('ver_convenio/<str:nombre_archivo>/', views.ver_convenio, name='ver_convenio'),
+    #Municipios
     path('ui4/',views.Ui4, name = "ui4"),
     path('uiL/',views.Listar_Municipios, name = "listar"),
+    path('actualizar_Mun/<int:id>/', views.Actualizar_Municipio, name='actualizar_Mun'),
+    path('deleteMun/<int:id>/', views.Eliminar_Municipio, name="delete_mun"),
+    path('detailsMun/<int:id>/', views.detalles_Municipio, name="md"),
 
     path('base/',views.base, name = "base"),
 
