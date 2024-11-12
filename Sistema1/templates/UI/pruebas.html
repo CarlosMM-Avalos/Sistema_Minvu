@@ -1,0 +1,44 @@
+
+{% extends "Ui\base.html" %}
+{% load static %}
+{% block content %}
+<head>
+
+
+    <link rel="stylesheet" href="{% static 'css/ui4.css' %}">
+
+</head>
+
+<div class="content">
+
+  <h1 class="logo">Agregar Municipio</h1>
+
+  <div class="contact-wrapper animated bounceInUp">
+      <div class="contact-form">
+          <h3>Contact us</h3>
+          <form action="">
+              <p>
+                  <label>Nombre</label>
+                  <input type="text" name="fullname">
+              </p>
+              <p>
+                  <label>Rut Municipal</label>
+                  <input type="email" name="email">
+              </p>
+              <p>
+                  <label>Cuenta Municipal</label>
+                  <input type="tel" name="phone">
+              </p>
+              
+              <p class="block">
+                  <button>
+                      Send
+                  </button>
+              </p>
+          </form>
+      </div>
+     
+  </div>
+
+</div>
+{% endblock %} 

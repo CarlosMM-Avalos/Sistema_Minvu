@@ -1,0 +1,53 @@
+{% extends "Ui\base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<head >
+
+    <link rel="stylesheet" href="{% static 'css/dm.css' %}">
+</head>
+<h1> Municipio: {{municipio.nombre}}</h1>
+
+
+{% if convenios %}
+<table>
+    <thead>
+        <tr>
+           
+            <th>nombre</th>
+            <th>descripcion</th>
+            <th>total</th>
+            <th>documento</th>       
+            <th>ver convenio</th>     
+        </tr>
+    </thead>    
+    <tbody>
+        {% for m in convenios %}
+        <tr>
+            
+            <td>{{ m.nombre }}</td>
+            <td>{{ m.descripcion }}</td>
+            <td>{{ m.total }}</td>
+            <td>{{ m.documento }}</td>
+            <p>{{ municipio.nombre }}</p>
+            <td><a href="{{ m.documento.url }}" target="_blank">Abrir convenio</a></td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="4">No hay convenios disponibles</td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+
+
+
+{% endblock %} 
+
+
+
+
