@@ -40,23 +40,27 @@ def Ui4(request):
          muni.rut = request.POST.get('rut')
          muni.cuenta = request.POST.get('cuenta')
          muni.save()
-         return redirect('listar')
+         return redirect('Mun_List')
    return render(request, 'Ui/ui4.html',)
 
 
 def Agregar_Convenios(request):
+   mun_data = Municipios.objects.all()
    if request.method == "POST":
-      if request.POST.get('nombre') and request.POST.get('descripcion') and request.POST.get('total') and request.POST.get('documento') and request.POST.get('municipio'):
+      if request.POST.get('nombre') and request.POST.get('descripcion') and request.POST.get('total') and request.FILES.get('documento') and request.POST.get('municipio'):
          conven = Convenios()
          conven.nombre = request.POST.get('nombre')
          conven.descripcion = request.POST.get('descripcion')
          conven.total = request.POST.get('total')
-         conven.documento = request.POST.get('documento')
-         conven.municipio = request.POST.get('municipio')
+         conven.documento = request.FILES.get('documento')
+         municipio_id = request.POST.get('municipio')
+         conven.municipio = Municipios.objects.get(id=int(municipio_id))
          conven.save()
-         return redirect('listar')
-   return render(request, 'Ui/convenios.html',)
+         print("Archivo guardado en:", conven.documento.path)  # Agregar esta línea
+         return redirect('Mun_List')
+   return render(request, 'Ui/convenios.html', {'municipio': mun_data})
 
+         #conven.municipio = request.POST.get('municipio')
 
 
 def Listar_Municipios(request):
@@ -86,14 +90,14 @@ def Actualizar_Municipio(request,id):
        municipio.rut = request.POST.get('rut')
        municipio.cuenta = request.POST.get('cuenta')
        municipio.save()
-       return redirect('listar')  # Redirige a la lista de municipios
+       return redirect('Mun_List')  # Redirige a la lista de municipios
     data = {'municipio': municipio}
     return render(request, 'UI\Actulizar_Mun.html',data)    
     
 def Eliminar_Municipio(request, id):
     municipio = get_object_or_404(Municipios, id=id)
     municipio.delete()
-    return redirect('listar')  # Redirige a la lista de municipios
+    return redirect('Mun_List')  # Redirige a la lista de municipios
    
 
 

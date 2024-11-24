@@ -11,6 +11,10 @@
 </head>
 <h1> Municipio: {{municipio.nombre}}</h1>
 
+<div class="button-container">
+    <!-- <a href="#" class="button">Cargar Archivo</a> -->
+    <a class="button"  href="{% url 'addConv' %}">Agregar convenios</a>
+</div>
 
 {% if convenios %}
 <table>
@@ -32,7 +36,7 @@
             <td>{{ m.descripcion }}</td>
             <td>{{ m.total }}</td>
             <td>{{ m.documento }}</td>
-            <p>{{ municipio.nombre }}</p>
+            
             <td><a href="{{ m.documento.url }}" target="_blank">Abrir convenio</a></td>
         </tr>
         {% endfor %}
