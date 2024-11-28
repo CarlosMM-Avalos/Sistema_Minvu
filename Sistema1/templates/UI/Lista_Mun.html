@@ -1,0 +1,64 @@
+
+{% extends "Ui\base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/ui3.css' %}">
+
+
+
+<br>
+
+<H6 style="margin-left: 100px;">Inicio /Programas /Pequeñas Localidades</H6>
+<br>
+<h3 style="margin-left: 100px;">
+    Programa Pequeñas Localidades(PPL)
+    
+</h3>
+
+<p style="margin-left: 200px; margin-right: 200px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos necessitatibus expedita labore aut officiis id delectus placeat ab unde iusto! Dolorem, sapiente exercitationem? Hic, ex. Repellat laudantium sapiente omnis quos?
+    Soluta distinctio neque perspiciatis. A similique nemo optio distinctio minus amet? Illo sit modi numquam error dolore, nesciunt aliquam quis nam aliquid sint velit exercitationem deleniti cupiditate eligendi? Sint, delectus?
+    Voluptatem expedita distinctio consectetur vitae iste nobis, nesciunt sapiente voluptatum cupiditate ipsum beatae modi numquam quam delectus minima eveniet recusandae deleniti soluta aliquam fuga ex dolore itaque laborum nemo. Quasi!
+    Voluptas architecto reiciendis perspiciatis facere unde, soluta, assumenda dolore ducimus quos aliquid illum sunt, hic est. Fuga deserunt molestias animi, rem similique numquam, corporis consequatur magnam quo consequuntur assumenda provident?</p>
+    
+    <hr>
+    
+    <div class="button-container">
+        <!-- <a href="#" class="button">Cargar Archivo</a> -->
+        <a class="button"  href="{% url 'Agregar_Mun' %}">Agregar Municipio</a>
+    </div>
+    {% if municipios_d %}
+    <p>{{ municipios_d|length }} registros encontrados</p>
+    <table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>nombre</th>
+            <th>rut</th>
+            <th>cuenta</th>
+            <th>detalles</th>
+            <th>Opciones</th>    
+        </tr>
+    </thead>    
+    <tbody>
+        {% for m in municipios_d %}
+        <tr>
+            <td>{{ m.id }}</td>
+            <td>{{ m.nombre }}</td>
+            <td>{{ m.rut }}</td>
+            <td>{{ m.cuenta }}</td>
+            <p>{{ municipio.nombre }}</p>
+            <td> <a class="button" href="{% url 'md' id=m.id %}">Detalles</a></td>
+            <td> <a href="{% url 'actualizar_Mun' id=m.id  %}">Editar</a>/<a href="{% url 'delete_mun' id=m.id  %}">eliminar</a></td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="4">No hay municipios disponibles</td>
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+
+
+
+{% endblock %} 

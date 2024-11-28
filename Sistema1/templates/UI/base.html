@@ -25,7 +25,7 @@
       </div>
       <hr style="color: white;">
       <div class="menu">
-        <a href="{% url 'Ui2' %}" class="d-block text-light p-3"><ion-icon name="apps-outline" class="me-2 lead"></ion-icon>INICIO </a>
+        <a href="{% url 'Home' %}" class="d-block text-light p-3"><ion-icon name="apps-outline" class="me-2 lead"></ion-icon>INICIO </a>
         <hr style="color: white;">
         {% if request.user.is_staff or request.user.is_superuser %}
         <a href="" class="d-block text-light p-3"><ion-icon name="person-add-outline" class="me-2 lead"></ion-icon>PROGRAMAS MINVU</a>
@@ -54,7 +54,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'Ui2' %}">Inicio</a>
+                <a class="nav-link active" aria-current="page" href="{% url 'Home' %}">Inicio</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Links</a>

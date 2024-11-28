@@ -3,4 +3,25 @@
 {% block content %}
 
 <h1>PAGINA INICIAL</h1>
+
+<h3>Historial de Convenios</h3>
+<ul>
+    {% for item in historial %}
+        <li>
+            <strong>Fecha:</strong> {{ item.fecha_modificacion }} <br>
+            <strong>Nombre:</strong> {{ item.nombre }} <br>
+            <strong>Descripción:</strong> {{ item.descripcion }} <br>
+            <strong>Total:</strong> {{ item.total }} <br>
+            {% if item.documento %}
+                <a href="{{ item.documento.url }}" target="_blank">Ver documento</a>
+            {% endif %}
+        </li>
+        <hr>
+    {% empty %}
+        <li>No hay cambios registrados.</li>
+    {% endfor %}
+</ul>
+<h3>Datos de Historial (Depuración)</h3>
+<pre>{{ historial|default:"No hay datos disponibles" }}</pre>
+
 {% endblock %}

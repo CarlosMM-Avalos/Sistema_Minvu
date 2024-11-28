@@ -1,0 +1,45 @@
+{% extends "Ui/base.html" %}
+{% load static %}
+
+{% block content %}
+
+
+<form method="POST" enctype="multipart/form-data">
+   {% csrf_token %}
+   <label>Nombre:</label>
+   <input type="text" name="nombre" value="{{ convenio.nombre }}" required><br>
+   <label>Descripcion:</label>
+   <input type="text" name="descripcion" value="{{ convenio.descripcion }}" required><br>
+   <label>Total:</label>
+   <input type="number" name="total" value="{{ convenio.total }}" required><br>
+   <label>Documento actual:</label>
+   {% if convenio.documento %}
+   <a href="{{ convenio.documento.url }}" target="_blank">Descargar archivo actual</a><br>
+   {% else %}
+   <span>No hay archivo cargado.</span><br>
+   {% endif %}
+   <label>Actualizar documento:</label>
+   <input type="file" name="documento"><br>
+   <label>Municipio:</label>
+   <input type="text" name="municipio" value="{{ convenio.municipio }}" required><br>
+   
+   <button type="submit">Guardar cambios</button>
+</form>
+{% endblock %}
+<!-- <h3>Actualizar Municipio</h3>
+<form method="POST">
+   {% csrf_token %}
+   <label>Nombre:</label>
+   <input type="text" name="nombre" value="{{ convenio.nombre }}" required><br>
+   <label>Descripcion:</label>
+   <input type="text" name="descripcion" value="{{ convenio.descripcion }}" required><br>
+   <label>Total:</label>
+   <input type="number" name="total" value="{{ convenio.total }}" required><br>
+   <label>Documento:</label>
+   <input type="file" name="documento" value="{{ convenio.documento }}" required><br>
+   <label>Municipio:</label>
+   <input type="text" name="municipio" value="{{ convenio.municipio }}" required><br>
+   
+   <button type="submit">Guardar cambios</button>
+</form>
+ -->
