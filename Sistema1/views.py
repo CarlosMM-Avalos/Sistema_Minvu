@@ -56,6 +56,9 @@ def Login_Template(request):
 def Inicio(request):
   return render(request,'Ui/ui1.html')
 
+def vista_perfil(request):
+   return render(request,'UI/Vista_Perfil.html')
+
 
 
 #Inicio----------------------------------
@@ -230,10 +233,13 @@ def Ver_Historial_Convenio(request, id):
 
 
 
-#Reintegros---------------------------------
+#Rendiciones---------------------------------
 
-def Lista_Reintegro(request):
-   return render(request,'UI/Reintegro.html',)
+def Lista_Rendiciones(request):
+   return render(request,'UI/Rendiciones.html',)
+
+def Agregar_Rendiciones(request):
+   return render(request, 'UI/Agregar_Rendiciones.html')
 
 
 
