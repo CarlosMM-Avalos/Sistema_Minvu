@@ -352,13 +352,14 @@ input[type=password]:placeholder {
             
             <input type="text" id="login" class="fadeIn second" name="username" placeholder="Nombre de usuario">
             <input type="password" id="password" class="fadeIn third" name="password" placeholder="Contraseña">
-            <a href="{% url 'Ui2' %}" type="submit" class="btn btn-info btn_iniciar">Iniciar sesion</a>
-            <button  href="{% url 'Ui2' %}" type="submit" class="btn btn-info btn_iniciar">Iniciar sesion</button>
+            
+            <button  href="{% url 'Home' %}" type="submit" class="btn btn-info btn_iniciar">Iniciar sesion</button>
           </form>
           
       
           <!-- Remind Passowrd -->
           <div id="formFooter">
+            <a href="{% url 'register' %}" type="submit" class="underlineHover">Registrar Cuenta</a> <br>
             <a class="underlineHover" href="#">Olvido la contraseña?</a>
           </div>
       

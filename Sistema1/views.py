@@ -1,12 +1,51 @@
 
 from django.shortcuts import render, redirect,get_object_or_404
-from django.contrib.auth import logout 
+from django.contrib.auth import logout, login, authenticate
 from django.contrib.auth.decorators import login_required
 from .forms import MunicipioForm
 from .models import Municipios,Convenios, HistorialConvenios
 from django.http import FileResponse, Http404
 import os
+from django.db.models import Q
+from .forms import CustomUserCreationForm
 # Create your views here.
+
+
+# views.py
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User
+from django.contrib.auth import login
+from django.contrib import messages
+
+def Register_Template(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if password != confirm_password:
+            messages.error(request, "Las contraseñas no coinciden.")
+            return redirect('register')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "El nombre de usuario ya existe.")
+            return redirect('register')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "El correo electrónico ya está en uso.")
+            return redirect('register')
+
+        # Crear el usuario
+        user = User.objects.create_user(username=username, email=email, password=password)
+        login(request, user)  # Autentica al usuario después de registrarse
+        messages.success(request, "Cuenta creada exitosamente.")
+        return redirect('Home')  # Redirige a la página principal o donde desees
+
+    return render(request, 'registration/register.html')
+
+
+
 
 
 @login_required
@@ -16,6 +55,8 @@ def Login_Template(request):
 @login_required
 def Inicio(request):
   return render(request,'Ui/ui1.html')
+
+
 
 #Inicio----------------------------------
 
@@ -43,15 +84,54 @@ def Lista_Mun(request):
    return render(request, 'Ui/Lista_Mun.html')
 
 def Listar_Municipios(request):
+
+   busqueda = request.GET.get('buscar')
    municipalidad = Municipios.objects.all()
+
+   if busqueda: 
+      municipalidad = Municipios.objects.filter(
+         Q(nombre__icontains = busqueda) |
+         Q(rut__icontains = busqueda) |
+         Q(cuenta__icontains = busqueda)
+      ).distinct()
+
    datos = {'municipios_d': municipalidad}
    return render(request,'Ui/Lista_Mun.html',datos)
 
-def detalles_Municipio(request,id):
-   municipio = get_object_or_404(Municipios, id=id)
-   convenios = municipio.convenios.all()  
-   datos = {"municipio":municipio, "convenios":convenios}
-   return render(request,'Ui/detalle_Municipio.html',datos)    
+# def detalles_Municipio(request,id):
+#    municipio = get_object_or_404(Municipios, id=id)
+
+#    busqueda = request.GET.get('buscar')
+#    convenios = Convenios.objects.all()
+
+#    if busqueda: 
+#       convenios = Convenios.objects.filter(
+#          Q(nombre__icontains = busqueda)).distinct()
+#    convenioss = municipio.convenios.all()  
+#    datos = {"municipio":municipio, "convenios":convenioss}
+#    return render(request,'Ui/detalle_Municipio.html',datos)    
+
+
+
+def detalles_Municipio(request, id):
+    municipio = get_object_or_404(Municipios, id=id)
+    
+    # Obtener la búsqueda del usuario
+    busqueda = request.GET.get('buscar')
+
+    # Filtrar convenios asociados al municipio
+    convenios = municipio.convenios.all()
+
+    if busqueda: 
+        # Aplicar filtro por nombre en los convenios del municipio
+        convenios = convenios.filter(
+            Q(nombre__icontains=busqueda)
+        ).distinct()
+
+    # Pasar los datos al template
+    datos = {"municipio": municipio, "convenios": convenios}
+    return render(request, 'Ui/detalle_Municipio.html', datos)
+
 
 def Actualizar_Municipio(request,id):
     municipio = get_object_or_404(Municipios, id=id)
@@ -124,6 +204,12 @@ def Actualizar_Convenio(request, id):
     data = {'convenio': convenio, 'historial': historial}
     return render(request, 'UI/Actulizar_Conv.html', data)
 
+def Eliminar_Convenios(request, id):
+    convenio = get_object_or_404(Convenios, id=id)
+    convenio.delete()
+    #return redirect('HTTP_REFERER', 'default_view')  
+    return redirect(request.META.get('HTTP_REFERER', 'default_view'))
+
 
 
 def Ver_Historial_Convenio(request, id):
@@ -141,6 +227,13 @@ def Ver_Historial_Convenio(request, id):
     
     # Pasar los datos a la plantilla para renderizarlos
     return render(request, 'UI/ui1.html', data)
+
+
+
+#Reintegros---------------------------------
+
+def Lista_Reintegro(request):
+   return render(request,'UI/Reintegro.html',)
 
 
 

@@ -13,4 +13,14 @@ class ConvenioForm(forms.ModelForm):
     class Meta:
         model = Convenios
         fields = ["id","nombre","descripcion","total","documento","municipio",]
+
+
+
+
+
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2', 'email']  # Agrega los campos que quieras
         

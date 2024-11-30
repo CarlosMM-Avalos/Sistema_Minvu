@@ -1,0 +1,382 @@
+{% extends "Ui\base.html" %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Mejorado</title>
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+
+        /* styles.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 250px 1fr;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    height: 100vh;
+}
+
+header {
+    grid-area: header;
+    background-color: #d32f2f;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo img {
+    height: 40px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-icon {
+    font-size: 20px;
+    background-color: white;
+    color: #d32f2f;
+    border-radius: 50%;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    background-color: #37474f;
+    color: white;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.sidebar ul li a:hover {
+    color: #d32f2f;
+}
+
+main {
+    grid-area: main;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.rendiciones {
+    flex: 2;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.rendiciones table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.rendiciones th, .rendiciones td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.tareas-pendientes {
+    flex: 1;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.tareas-pendientes button {
+    margin-top: 10px;
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.tareas-pendientes button:hover {
+    background-color: #b71c1c;
+}
+
+.grafica {
+    margin-top: 20px;
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart {
+    display: flex;
+    justify-content: space-around;
+}
+
+.chart-item {
+    text-align: center;
+}
+
+.pie-chart {
+    width: 100px;
+    height: 100px;
+    background: #d32f2f;
+    border-radius: 50%;
+    margin: 0 auto;
+    line-height: 100px;
+    color: white;
+}
+
+
+
+
+
+    </style>
+
+</head>
+<body>
+    <div class="">
+       
+    
+        <main>
+            <div class="content">
+                <section class="rendiciones">
+                    <h2>Rendiciones</h2>
+                    <p>Diego de Almagro / Modificaciones</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Mes</th>
+                                <th>Fecha</th>
+                                <th>Monto</th>
+                                <th>Acciones</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Enero</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Febrero</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Marzo</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Abril</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody><tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Mayo</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Junio</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Agosto</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Septiembre</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Octubre</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Noviembre</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+                        <tbody>
+                            <!-- Generar filas para cada mes -->
+                            <tr>
+                                <td>Rendición de Diciembre</td>
+                                <td>Fecha</td>
+                                <td>Monto</td>
+                                <td>
+                                    <button>🔍</button>
+                                    <button>⬇️</button>
+                                </td>
+                                <td>🟢</td>
+                            </tr>
+                            <!-- Repetir filas para los meses restantes -->
+                        </tbody>
+ 
+
+                    </table>
+                </section>
+                <section class="tareas-pendientes">
+                    <h2>Tareas Pendientes</h2>
+                    <p>No hay tareas pendientes</p>
+                    <button>Añadir Tarea ➕</button>
+                </section>
+            </div>
+            <section class="grafica">
+                <h2>Total Convenio</h2>
+                <div class="chart">
+                    <div class="chart-item">
+                        <div class="pie-chart">Gráfico 1</div>
+                        <p>$109M (70%)</p>
+                    </div>
+                    <div class="chart-item">
+                        <div class="pie-chart">Gráfico 2</div>
+                        <p>$62M (30%)</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+{% endblock %}

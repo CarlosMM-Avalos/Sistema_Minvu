@@ -11,10 +11,23 @@
 </head>
 <h1> Municipio: {{municipio.nombre}}</h1>
 
-<div class="button-container">
-    <!-- <a href="#" class="button">Cargar Archivo</a> -->
-    <a class="button"  href="{% url 'addConv' %}">Agregar convenios</a>
+
+
+
+
+<div class="d-flex justify-content-between align-items-center px-4 ">
+    <!-- Botón a la izquierda -->
+    <!-- <button class="btn btn-primary" type="button">Agregar Municipio</button> -->
+    <a class="button btn btn-primary"  href="{% url 'addConv' %}">Agregar convenios</a>
+    
+    <!-- Formulario a la derecha -->
+    <form class="d-flex" role="search" method="get">
+        <input class="form-control me-2" type="search" placeholder="Search" name="buscar" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
 </div>
+<hr>
+<br>
 
 {% if convenios %}
 <table>
@@ -40,7 +53,7 @@
             <!-- <td>{{ m.documento }}</td>             -->
             <td><a href="{{ m.documento.url }}" target="_blank">Abrir convenio</a></td>
                 
-            <td> <a href="{% url 'H_convenio' id=m.id  %}">Historial</a>/ <a href="{% url 'actualizar_Conv' id=m.id  %}">Editar</a>/<a href="{% url 'delete_mun' id=m.id  %}">eliminar</a></td>
+            <td> <a href="{% url 'H_convenio' id=m.id  %}">Historial</a>/ <a href="{% url 'actualizar_Conv' id=m.id  %}">Editar</a>/<a href="{% url 'eliminar_Conv' id=m.id  %}">eliminar</a></td>
         </tr>
         {% endfor %}
         {% else %}

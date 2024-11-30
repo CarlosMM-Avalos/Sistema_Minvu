@@ -17,16 +17,28 @@
 
 <p style="margin-left: 200px; margin-right: 200px;">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos necessitatibus expedita labore aut officiis id delectus placeat ab unde iusto! Dolorem, sapiente exercitationem? Hic, ex. Repellat laudantium sapiente omnis quos?
     Soluta distinctio neque perspiciatis. A similique nemo optio distinctio minus amet? Illo sit modi numquam error dolore, nesciunt aliquam quis nam aliquid sint velit exercitationem deleniti cupiditate eligendi? Sint, delectus?
-    Voluptatem expedita distinctio consectetur vitae iste nobis, nesciunt sapiente voluptatum cupiditate ipsum beatae modi numquam quam delectus minima eveniet recusandae deleniti soluta aliquam fuga ex dolore itaque laborum nemo. Quasi!
-    Voluptas architecto reiciendis perspiciatis facere unde, soluta, assumenda dolore ducimus quos aliquid illum sunt, hic est. Fuga deserunt molestias animi, rem similique numquam, corporis consequatur magnam quo consequuntur assumenda provident?</p>
+    Voluptatem expedita distinctio consectetur vitae iste nobis, nesciunt sapiente voluptatum cupiditate ipsum beatae modi numquam quam delectus minima eveniet recusandae deleniti soluta aliquam fuga ex dolore itaque laborum nemo.</p>
     
     <hr>
     
-    <div class="button-container">
-        <!-- <a href="#" class="button">Cargar Archivo</a> -->
-        <a class="button"  href="{% url 'Agregar_Mun' %}">Agregar Municipio</a>
+   
+   
+
+    <div class="d-flex justify-content-between align-items-center px-4 ">
+        <!-- Botón a la izquierda -->
+        <!-- <button class="btn btn-primary" type="button">Agregar Municipio</button> -->
+        <a class="button btn btn-primary"  href="{% url 'Agregar_Mun' %}">Agregar Municipio</a>
+        
+        <!-- Formulario a la derecha -->
+        <form class="d-flex" role="search" method="get">
+            <input class="form-control me-2" type="search" placeholder="Search" name="buscar" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
     </div>
+    
+    <div class="">
     {% if municipios_d %}
+    </div>
     <p>{{ municipios_d|length }} registros encontrados</p>
     <table>
     <thead>
