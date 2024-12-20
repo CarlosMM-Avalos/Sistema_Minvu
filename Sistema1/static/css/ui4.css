@@ -1,0 +1,119 @@
+/* Estilo global para el formulario */
+body {
+    font-family: 'Georgia', Times, serif;
+    background-color: #f8f9fa; /* Fondo claro para la página */
+}
+
+/* Estilos para el título principal */
+h1 {
+    font-size: 2.5rem;
+    color: #343a40; /* Título en color oscuro */
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* Estilo para los grupos de formulario */
+.nice-form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Personalización de los campos de entrada */
+.form-control {
+    border: 2px solid #ced4da;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+/* Cambio de color del borde al enfocar un campo */
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25);
+}
+
+/* Estilo del botón de agregar usuario */
+button[type="submit"] {
+    background-color: #007bff; /* Color de fondo azul */
+    color: white; /* Color del texto */
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambio de color del botón al pasar el mouse */
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para las etiquetas del formulario */
+.form-label {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #495057; /* Color oscuro para las etiquetas */
+}
+
+/* Ajuste en la disposición de los campos del formulario */
+.container {
+    max-width: 600px; /* Ancho máximo para el formulario */
+    margin: 0 auto; /* Centrado horizontal */
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaciado entre los elementos del formulario */
+.nice-form-group input {
+    width: 100%;
+}
+
+/* Estilo para los íconos dentro del título */
+h1 svg {
+    margin-right: 10px;
+    vertical-align: middle;
+    fill: #007bff;
+}
+
+/* Estilo para el fondo del formulario */
+section {
+    background-color: #f8f9fa;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezados de la tabla */
+.table-dark th {
+    background-color: #343a40 !important; /* Fondo oscuro */
+    color: white !important; /* Texto blanco */
+    text-align: center;
+    padding: 10px;
+}
+
+/* Filas alternas */
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+
+/* Íconos */
+.btn-link i {
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.btn-link.text-warning:hover i {
+    color: #ffc107 !important;
+}
+
+.btn-link.text-danger:hover i {
+    color: #e74c3c !important;
+}
+
+.btn-link.text-primary:hover i {
+    color: #007bff !important;
+}
+

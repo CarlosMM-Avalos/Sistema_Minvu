@@ -1,0 +1,21 @@
+def programas_detalles(request, id):
+    busqueda = request.GET.get('buscar')
+    programa = get_object_or_404(Programas, id=id)
+    municipio = programa.municipios.all()
+    
+    # Filtrar municipios según búsqueda
+    if busqueda: 
+        municipio = municipio.filter(
+            Q(nombre__icontains=busqueda) |
+            Q(rut__icontains=busqueda) |
+            Q(cuenta__icontains=busqueda)
+        ).distinct()
+
+    # Implementar paginación
+    paginator = Paginator(municipio, 8)  # 8 registros por página
+    page_number = request.GET.get('page')
+    municipios = paginator.get_page(page_number)
+
+    # Pasar datos al template
+    datos = {"municipios": municipios, "programas": [programa]}
+    return render(request, "UI/detalles_programas.html", datos)

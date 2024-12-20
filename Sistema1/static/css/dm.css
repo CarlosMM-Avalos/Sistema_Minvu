@@ -1,0 +1,105 @@
+/* Estilo global */
+body {
+    font-family: 'Georgia', 'Times New Roman', Times, serif;
+    background-color: #f8f9fa; /* Fondo claro para la página */
+    color: #333; /* Color de texto más oscuro */
+}
+
+/* Títulos */
+h1 {
+    font-size: 2rem;
+    color: #0056b3; /* Color azul para los títulos */
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* Formulario de búsqueda */
+form {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+form .form-control {
+    width: 250px; /* Ajustar el tamaño del input */
+    margin-right: 10px;
+}
+
+form .btn {
+    background-color: #28a745; /* Botón verde */
+    color: white;
+}
+
+form .btn:hover {
+    background-color: #218838; /* Hover para el botón */
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    border-collapse: collapse; /* Eliminar espacios entre celdas */
+    color: #000 !important; /* Forzar texto negro en toda la tabla */
+}
+
+/* Cabecera de la tabla */
+th {
+    background-color: #343a40; /* Fondo oscuro para las cabeceras */
+    color: white !important; /* Texto blanco */
+    padding: 12px 15px;
+    text-align: left;
+}
+
+/* Celdas */
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd; /* Línea sutil entre filas */
+    color: #000 !important; /* Texto negro */
+}
+
+/* Filas alternas */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Fondo gris claro */
+}
+
+/* Estilos para los enlaces dentro de la tabla */
+table a {
+    text-decoration: none; /* Quitar el subrayado */
+    color: #000 !important; /* Texto negro para enlaces */
+}
+
+table a:hover {
+    text-decoration: underline; /* Subrayado al pasar el ratón */
+    color: #0056b3 !important; /* Azul en hover */
+}
+
+/* Botón de Agregar Convenio */
+.button {
+    padding: 10px 20px;
+    background-color: #444d57;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.button:hover {
+    background-color: #656f7a;
+    text-decoration: none;
+}
+
+/* Mensajes de no convenios */
+p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #e74c3c;
+}
+
+/* Encabezados de la tabla (thead) */
+thead.table-light.text-center th {
+    color: #000 !important; /* Cambiar el texto a negro */
+    background-color: #f8f9fa !important; /* Asegurar un fondo claro */
+}

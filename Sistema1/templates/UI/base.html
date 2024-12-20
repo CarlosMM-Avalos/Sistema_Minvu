@@ -1,0 +1,290 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Sistema MINVU{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <!-- CSS Personalizado -->
+  <style>
+    .notifications-dropdown {
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        width: 340px;
+        max-height: 400px;
+        overflow-y: auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        display: none;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+    }
+  
+    .notifications-dropdown.active {
+        display: block;
+    }
+  
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+  
+    .notification-header {
+        padding: 15px;
+        background-color: #0056b3;
+        color: #ffffff;
+        font-weight: bold;
+        text-align: center;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+  
+    .notification-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+  
+    .notification-item:last-child {
+        border-bottom: none;
+    }
+  
+    .notification-item:hover {
+        background-color: #f9f9f9;
+        transform: scale(1.02);
+    }
+  
+    .notification-icon {
+        font-size: 24px;
+        color: #0056b3;
+    }
+  
+    .notification-text {
+        flex-grow: 1;
+        font-size: 14px;
+        color: #444444;
+        line-height: 1.5;
+    }
+  
+    .notification-time {
+        font-size: 12px;
+        color: #777777;
+    }
+  
+    .see-all {
+        display: block;
+        padding: 12px;
+        text-align: center;
+        background-color: #f8f9fa;
+        text-decoration: none;
+        color: #0056b3;
+        font-weight: bold;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+  
+    .see-all:hover {
+        background-color: #e2e6ea;
+        color: #003d7a;
+    }
+  </style>
+  
+
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  <!-- Barra Superior -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0056b3;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="https://www.laopinon.cl/sites/laopinon.cl/files/imagen_noticia/minvu2.png" alt="Logo" width="80" height="auto" class="d-inline-block align-text-top me-2">
+        Sistema Minvu
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="#">Holas, {{ request.user.username }}</a>
+          </li>
+          <li class="nav-item position-relative">
+            <a class="nav-link text-light" href="#" id="notification-icon"><i class="bi bi-bell"></i></a>
+            <!-- funcion nueva  -->
+             <!-- Dropdown de notificaciones -->
+              <div class="notifications-dropdown" id="notifications-dropdown">
+                <div class="notification-header">Notificaciones</div>
+                
+              
+
+               {% for notificacion in notifi %}
+                <div class="notification-item">
+                    <i class="bi bi-bell notification-icon"></i>
+                    <div class="notification-text">
+                        {{ notificacion.mensaje }}
+                        <div class="notification-time">
+                            {% if notificacion.fecha_creacion|date:"Y-m-d" == now|date:"Y-m-d" %}
+                                Hace {{ now|timeuntil:notificacion.fecha_creacion }} minutos
+                            {% else %}
+                                {{ notificacion.fecha_creacion|date:"d M Y" }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="notification-item">
+                    <div class="notification-text">No hay nuevas notificaciones.</div>
+                </div>
+                {% endfor %} 
+
+                
+
+                <!-- <a href="#" class="see-all">Ver todas las notificaciones</a> -->
+              </div>
+
+
+
+
+            <!-- funcion nueva fun  -->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'perfil'%}"><i class="fas fa-user-circle me-2"></i> </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'exitt' %}"> <i class="fas fa-sign-out-alt me-2"></i></a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link text-light" href="{% url 'login' %}">Iniciar Sesión</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Barra Lateral -->
+  <div class="sidebar text-light position-fixed h-100 pt-4" style="top: 56px; width: 250px; background-color: #0056b3;">
+    <ul class="nav flex-column">
+      <!-- Inicio -->
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'programas' %}">
+          <i class="bi bi-grid me-2"></i> Inicio
+        </a>
+      </li>
+      <!-- Programas Minvu -->
+      <li class="nav-item">
+        <a class="nav-link text-light collapsed d-flex justify-content-between align-items-center" href="#programasSubmenu" data-bs-toggle="collapse" role="button" aria-expanded="false">
+          <span><i class="bi bi-person-plus me-2"></i> Programas Minvu</span>
+          <i class="bi bi-chevron-down"></i>
+        </a>
+        <ul class="collapse" id="programasSubmenu">
+          <li>
+            <a class="nav-link text-light ps-4" href="/detallesProgramas/1/">
+              <i class="fas fa-home"></i> Pequeñas Localidades
+            </a>
+          </li>
+          <li>
+            <a class="nav-link text-light ps-4" href="/detallesProgramas/2/">
+              <i class="fas fa-building"></i> Barrios
+            </a>
+          </li>
+          <li>
+            <a class="nav-link text-light ps-4" href="">
+              <i class="fas fa-users"></i> Asentamientos Precarios
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!-- Dashboard -->
+      <li class="nav-item">
+        <a class="nav-link text-light collapsed d-flex justify-content-between align-items-center" href="#Submenu" data-bs-toggle="collapse" role="button" aria-expanded="false">
+          <span><i class="fas fa-tachometer-alt"></i> Dashboard</span>
+          <i class="bi bi-chevron-down"></i>
+        </a>
+        <ul class="collapse" id="Submenu">
+          <li>
+            <a class="nav-link text-light  ps-4" href="#">
+              <i class="fas fa-chart-bar"></i> Reporte
+            </a>
+          </li>
+          <li>
+            <a class="nav-link text-light  ps-4" href="{% url 'dashboard' %}">
+              <i class="fas fa-chart-line"></i> Estadísticas
+            </a>
+          </li>
+        </ul>
+      </li>
+      <!-- Localidades -->
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'Agregar_Mun' %}">
+          <i class="bi bi-geo-alt"></i> Agregar Localidades
+        </a>
+      </li>
+      <!-- Reservados -->
+      <li class="nav-item">
+        <a class="nav-link text-light" href="{% url 'Listar_Reintegros' %}">
+          <i class="fas fa-book"></i> Reintegros
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Contenido Principal -->
+  <div class="content" style="margin-left: 250px; padding: 20px; padding-top: 80px;">
+    
+    
+    
+    
+
+
+
+
+    {% block content %}
+    <!-- Aquí se carga el contenido dinámico -->
+    {% endblock %}
+  </div>
+
+  <script>
+    const notificationIcon = document.getElementById('notification-icon');
+    const notificationsDropdown = document.getElementById('notifications-dropdown');
+
+    notificationIcon.addEventListener('click', () => {
+      notificationsDropdown.classList.toggle('active');
+    });
+
+    // Cerrar el dropdown si se hace clic fuera
+    document.addEventListener('click', (event) => {
+      if (!notificationIcon.contains(event.target) && !notificationsDropdown.contains(event.target)) {
+        notificationsDropdown.classList.remove('active');
+      }
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,178 @@
+/* Barra lateral */
+#sidebar-container {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: -20px; /* Mueve la barra lateral 20px más arriba */
+    left: 0;
+    background-color: #0056b3;
+    color: white;
+    padding-top: 20px;
+    transition: width 0.3s ease;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#sidebar-container .logo img {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 200%; /* Aumentar el tamaño de la imagen */
+    height: auto; /* Mantener la proporción de la imagen */
+    margin-left: -10%; /* Ajustar la posición para centrar la imagen */
+}
+
+
+#sidebar-container .logo img {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 200%; /* Aumentar el tamaño de la imagen */
+    height: auto; /* Mantener la proporción de la imagen */
+    margin-left: -10%; /* Ajustar la posición para centrar la imagen */
+}
+
+/* Barra superior */
+.navbar {
+    background-color: #0056b3;
+    padding: 10px 20px;
+    border-bottom: 2px solid #0056b3;
+}
+
+.navbar h2 {
+    color: white;
+    margin-bottom: 0;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: white !important;
+    font-size: 16px;
+    margin-right: 15px;
+    transition: color 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-link:hover {
+    color: #ffcc00;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-menu {
+    background-color: #007bff;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-item {
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-item:hover {
+    background-color: #007bff;
+}
+
+.navbar .navbar-nav .nav-item.dropdown .dropdown-divider {
+    border-color: #007bff;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    #sidebar-container {
+        width: 0;
+    }
+
+    #sidebar-container.active {
+        width: 250px;
+    }
+}
+
+/* Botón para activar el menú en dispositivos móviles */
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-color: white;
+}
+
+/* Barra Superior */
+.navbar {
+    background-color: #0056b3; /* Un azul más oscuro */
+  }
+  
+/* Barra Lateral */
+.sidebar {
+    background-color: #0056b3; /* Un azul más oscuro */
+}
+
+  /* Elimina la separación entre el navbar y el sidebar */
+  .navbar {
+    margin-bottom: 0;
+    z-index: 1030; /* Asegura que el navbar esté sobre otros elementos */
+  }
+
+  /* Alinea la barra lateral con el navbar */
+  .sidebar {
+    position: fixed;
+    top: 0; /* Alínea la barra lateral con la barra superior */
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #0056b3;
+    color: #fff;
+    z-index: 1020; /* Asegura que esté justo debajo del navbar */
+    border-top: none; /* Elimina cualquier línea separadora */
+  }
+
+  /* Contenido principal con margen */
+  .content {
+    margin-left: 250px; /* Ajusta según el ancho del sidebar */
+    padding: 20px;
+    padding-top: 70px; /* Espacio bajo el navbar */
+  }
+
+  /* Estilo de los enlaces de la barra lateral */
+  .sidebar .nav-link {
+    color: #fff;
+    font-weight: 500;
+    padding: 10px 15px;
+  }
+
+  .sidebar .nav-link:hover {
+    background-color: #004494;
+    text-decoration: none;
+  }
+
+  /* Submenús dentro del sidebar */
+  .sidebar .collapse .nav-link {
+    padding-left: 30px; /* Indentación para subelementos */
+  }
+
+  /* Espaciado visual para contenido del navbar */
+  .navbar-nav .nav-item .nav-link {
+    margin-right: 15px;
+  }
+
+
+
+/* Estilo general para el submenú */
+#programasSubmenu {
+    padding-left: 0;
+    list-style: none; /* Elimina los puntos de la lista */
+    margin: 0;
+  }
+  
+  #programasSubmenu li a {
+    display: block;
+    padding: 10px 20px; /* Espaciado interno para los enlaces */
+    text-decoration: none; /* Elimina el subrayado del texto */
+    color: #ffffff; /* Color del texto */
+    background-color: transparent; /* Fondo transparente */
+    border-radius: 4px; /* Bordes redondeados */
+    transition: background-color 0.3s ease; /* Transición suave al cambiar de color */
+  }
+  
+  /* Efecto de sombreado al pasar el mouse */
+  #programasSubmenu li a:hover {
+    background-color: rgba(0, 0, 0, 0.5); /* Sombra oscura de fondo */
+    color: #ffffff; /* Color del texto al pasar el mouse */
+  }
+  

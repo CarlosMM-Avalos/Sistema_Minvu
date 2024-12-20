@@ -1,0 +1,160 @@
+{% extends "UI/base.html" %}
+{% block content %}
+
+
+<style>
+     
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-right: 10px;
+            font-weight: bold;
+            color: #555555;
+        }
+
+        select {
+            padding: 8px 12px;
+            font-size: 16px;
+            border: 1px solid #dddddd;
+            border-radius: 4px;
+            background-color: #ffffff;
+            color: #333333;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        select:hover {
+            border-color: #aaaaaa;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        thead {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        th {
+            text-transform: uppercase;
+            font-size: 14px;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        td {
+            font-size: 14px;
+        }
+
+        .empty-message {
+            text-align: center;
+            font-style: italic;
+            color: #888888;
+            padding: 20px 0;
+        }
+    
+</style>
+
+  <!-- UI/Rendiciones.html -->
+  
+    <div class="container mt-4"><a class="button btn btn-primary" href="{% url 'agregar_rendicion' %}">Agregar Rendiciones</a></div>
+
+<section>
+    <h1>Rendiciones para el Convenio: {{ convenio.nombre }}</h1>
+
+    <!-- Formulario para filtrar por mes -->
+    <form method="get">
+        <label for="mes_rendicion">Filtrar por Mes:</label>
+        <select name="mes_rendicion" id="mes_rendicion" onchange="this.form.submit()">  
+            <option value="" {% if not mes_filtro %}selected{% endif %}>Todos</option>
+            <option value="enero" {% if mes_filtro == "enero" %}selected{% endif %}>Enero</option>
+            <option value="febrero" {% if mes_filtro == "febrero" %}selected{% endif %}>Febrero</option>
+            <option value="marzo" {% if mes_filtro == "marzo" %}selected{% endif %}>Marzo</option>
+            <option value="abril" {% if mes_filtro == "abril" %}selected{% endif %}>Abril</option>
+            <option value="mayo" {% if mes_filtro == "mayo" %}selected{% endif %}>Mayo</option>
+            <option value="junio" {% if mes_filtro == "junio" %}selected{% endif %}>Junio</option>
+            <option value="julio" {% if mes_filtro == "julio" %}selected{% endif %}>Julio</option>
+            <option value="agosto" {% if mes_filtro == "agosto" %}selected{% endif %}>Agosto</option>
+            <option value="septiembre" {% if mes_filtro == "septiembre" %}selected{% endif %}>Septiembre</option>
+            <option value="octubre" {% if mes_filtro == "octubre" %}selected{% endif %}>Octubre</option>
+            <option value="noviembre" {% if mes_filtro == "noviembre" %}selected{% endif %}>Noviembre</option>
+            <option value="diciembre" {% if mes_filtro == "diciembre" %}selected{% endif %}>Diciembre</option>
+        </select>
+    </form>
+
+    <!-- Tabla para listar las rendiciones -->
+    <table>
+        <thead>
+            <tr>
+                <th>Mes</th>
+                <th>Número Oficio</th>
+                <th>Estado</th>
+                <th>Total Rendido</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rendicion in rendiciones %}
+            <tr>
+                <td>{{ rendicion.mes_rendicion }}</td>
+                <td>{{ rendicion.numero_oficio }}</td>
+                <td>{{ rendicion.estado }}</td>
+                <td>{{ rendicion.gasto_operacional|add:rendicion.gasto_personal|add:rendicion.gasto_inversion }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4">No hay rendiciones para el mes seleccionado.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+</body>
+</html>
+{% endblock %}

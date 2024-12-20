@@ -1,0 +1,227 @@
+{% extends "UI/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/ui4.css' %}">
+
+
+    <style>
+
+        /* Estilos generales para el formulario */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+form {
+    width: 100%;
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+h1 svg {
+    margin-right: 10px;
+    fill: #4CAF50;
+}
+
+section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.nice-form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.nice-form-group label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.nice-form-group input,
+.nice-form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fafafa;
+    color: #333;
+}
+
+.nice-form-group input:focus,
+.nice-form-group select:focus {
+    outline: none;
+    border-color: #4CAF50;
+    background-color: #e9f7e9;
+}
+
+button {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Hacer que algunos campos tomen el ancho completo en pantallas más pequeñas */
+@media (max-width: 800px) {
+    section {
+        grid-template-columns: 1fr; /* Columna única en pantallas pequeñas */
+    }
+}
+
+/* Para campos de fecha y número */
+.nice-form-group input[type="date"]::-webkit-calendar-picker-indicator {
+    color: #4CAF50;
+}
+
+.nice-form-group input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+.nice-form-group input[type="number"]::-webkit-outer-spin-button,
+.nice-form-group input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Ajustes adicionales para mejorar la alineación y el espaciado */
+button {
+    grid-column: span 2;
+    margin-top: 20px;
+}
+
+
+    </style>
+
+</head>
+
+<form action="{% url 'agregar_rendicion' %}" method="post">
+    <h1>AGREGAR RENDICION</h1>
+    {% csrf_token %}
+
+    <section>
+        <div class="href-target" id="structure"></div>
+       
+        <!-- Campo para seleccionar el convenio -->
+        <div class="nice-form-group">
+            <label for="convenio">Convenio</label>
+            <select name="convenio" id="convenio" required>
+                <option value="" disabled selected>Seleccione un Convenio</option>
+                {% for convenio in convenios %}
+                    <option value="{{ convenio.id }}">{{ convenio.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="nice-form-group">
+            <label for="numero_oficio">Número de Oficio</label>
+            <input type="texto" name="numero_oficio" id="numero_oficio" placeholder="Ej: 12345" required />
+        </div>
+
+        <div class="nice-form-group wide">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" rows="4" placeholder="Escribe una breve descripción..." required></textarea>
+        </div>
+
+
+        <div class="nice-form-group">
+            <label for="mes_rendicion">Mes de Rendición</label>
+            <select name="mes_rendicion" id="mes_rendicion" required>
+                <option value="enero">Enero</option>
+                <option value="febrero">Febrero</option>
+                <option value="marzo">Marzo</option>
+                <option value="abril">Abril</option>
+                <option value="mayo">Mayo</option>
+                <option value="junio">Junio</option>
+                <option value="julio">Julio</option>
+                <option value="agosto">Agosto</option>
+                <option value="septiembre">Septiembre</option>
+                <option value="octubre">Octubre</option>
+                <option value="noviembre">Noviembre</option>
+                <option value="diciembre">Diciembre</option>
+            </select>
+        </div>
+
+        <div class="nice-form-group">
+            <label for="numero_oficio">Número de Oficio</label>
+            <input type="number" name="numero_oficio" id="numero_oficio" placeholder="Ej: 12345" required />
+        </div>
+
+        <div class="nice-form-group">
+            <label for="estado">Estado</label>
+            <select name="estado" id="estado" required>
+                <option value="rendido">Rendido</option>
+                <option value="sin_rendir">Sin Rendir</option>
+                <option value="cancelado">Cancelado</option>
+            </select>
+        </div>
+
+        <div class="nice-form-group">
+            <label for="fecha_de_oficio">Fecha de Oficio</label>
+            <input type="date" name="fecha_de_oficio" id="fecha_de_oficio" required />
+        </div>
+
+        <div class="nice-form-group">
+            <label for="n_nemo_interno">Número Nemo Interno</label>
+            <input type="number" name="n_nemo_interno" id="n_nemo_interno" placeholder="Ej: NM1234" required />
+        </div>
+
+        <div class="nice-form-group">
+            <label for="n_sigfe">Número SIGFE</label>
+            <input type="number" name="n_sigfe" id="n_sigfe" placeholder="Ej: 98765" required />
+        </div>
+
+        <div class="nice-form-group">
+            <label for="fecha_sigfe">Fecha SIGFE</label>
+            <input type="date" name="fecha_sigfe" id="fecha_sigfe" required />
+        </div>
+
+        <div class="nice-form-group">
+            <label for="gasto_operacional">Gasto Operacional</label>
+            <input type="number" name="gasto_operacional" id="gasto_operacional" placeholder="Ej: 100.500" step="0.01" required />
+        </div>
+
+        <div class="nice-form-group">
+            <label for="gasto_personal">Gasto Personal</label>
+            <input type="number" name="gasto_personal" id="gasto_personal" placeholder="Ej: 500.000" step="0.01" required />
+        </div>
+
+        <div class="nice-form-group">
+            <label for="gasto_inversion">Gasto Inversión</label>
+            <input type="number" name="gasto_inversion" id="gasto_inversion" placeholder="Ej: 2000.000" step="0.01" required />
+        </div>
+
+        <div>
+            <button type="submit" name="submit">Agregar Rendición</button>
+        </div>
+    </section>
+</form>
+
+{% endblock %}

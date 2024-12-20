@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Convenio</title>
+</head>
+<body>
+    <h1>Historial de Convenio: {{ convenio.nombre }}</h1>
+
+    <h2>Detalles del Convenio</h2>
+    <p><strong>Descripción:</strong> {{ convenio.descripcion }}</p>
+    <p><strong>Total:</strong> {{ convenio.total }}</p>
+    <p><strong>Documento:</strong> 
+        {% if convenio.documento %}
+            <a href="{{ convenio.documento.url }}" target="_blank">Ver Documento</a>
+        {% else %}
+            No hay documento adjunto.
+        {% endif %}
+    </p>
+
+    <h2>Historial de Cambios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>Total</th>
+                <th>Documento</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for registro in historial %}
+                <tr>
+                    <td>{{ registro.fecha }}</td>
+                    <td>{{ registro.nombre }}</td>
+                    <td>{{ registro.descripcion }}</td>
+                    <td>{{ registro.total }}</td>
+                    <td>
+                        {% if registro.documento %}
+                            <a href="{{ registro.documento.url }}" target="_blank">Ver Documento</a>
+                        {% else %}
+                            No hay documento adjunto.
+                        {% endif %}
+                    </td>
+                </tr>
+                
+            {% empty %}
+                <tr>
+                    <td colspan="5">No hay historial registrado para este convenio.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{% url 'Mun_List' %}">Volver a la lista de convenios</a>
+</body>
+</html>

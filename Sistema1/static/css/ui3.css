@@ -1,0 +1,48 @@
+.table {
+  background-color: #ffffff !important; /* Fondo blanco para toda la tabla */
+  color: #000000 !important; /* Texto negro para todas las celdas */
+  border-collapse: separate !important; /* Elimina espacios entre bordes */
+  width: 100% !important; /* Asegurar que la tabla use todo el ancho del contenedor */
+}
+
+.table th, .table td {
+  border: none !important; /* Eliminar bordes de las celdas */
+  padding: 8px !important; /* Espaciado interno */
+  text-align: left !important; /* Alineación predeterminada del texto */
+  color: #000000 !important; /* Texto negro en cada celda */
+}
+
+.table th {
+  background-color: #f8f9fa !important; /* Fondo gris claro para los encabezados */
+  font-weight: bold !important; /* Negrita para diferenciar encabezados */
+  text-align: center !important; /* Centrar texto en los encabezados */
+}
+
+.table tbody {
+  background-color: #ffffff !important; /* Fondo blanco para el cuerpo de la tabla */
+}
+
+.table tbody tr {
+  border-bottom: 1px solid #e9ecef !important; /* Línea sutil entre filas */
+  background-color: #ffffff !important; /* Fondo blanco para cada fila */
+  color: #000000 !important; /* Texto negro para las filas */
+}
+
+.table tbody tr:hover {
+  background-color: #f8f9fa !important; /* Fondo gris claro al pasar el ratón */
+}
+
+.table tbody td:nth-child(4) {
+  text-align: center !important; /* Centrar el contenido de la columna "Detalles" */
+}
+
+
+.table td.text-center {
+  text-align: center !important; /* Asegura que el contenido esté centrado */
+  vertical-align: middle !important; /* Centra verticalmente */
+}
+
+.table td.text-center a {
+  display: inline-block; /* Asegura que los íconos estén en línea */
+  margin: 0 5px; /* Espaciado entre los íconos */
+}

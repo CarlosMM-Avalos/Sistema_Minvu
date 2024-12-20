@@ -1,0 +1,71 @@
+/* Contenedor de los formularios alineados verticalmente */
+body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+
+.form-row {
+    display: flex;
+    flex-direction: column;  /* Cambiado a columna para apilar los formularios */
+    gap: 20px;  /* Espacio entre los formularios */
+    align-items: center;  /* Centra los formularios en el contenedor */
+    margin-bottom: 20px;
+}
+
+/* Recuadro de formularios (eliminado) */
+.form-container {
+    width: 100%;  /* Asegura que el formulario ocupe el 100% del espacio disponible */
+    max-width: 600px;  /* Limita el tamaño máximo a 600px */
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+/* Estilos del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+button {
+    align-self: center;
+    width: 100%;  /* Hacer el botón de tamaño completo dentro del formulario */
+}
+
+/* Estilos de los inputs, sin borde ni sombra */
+input.form-control {
+    border: none;
+    border-bottom: 2px solid #ccc;
+    border-radius: 0;
+    padding: 8px 10px;
+    margin-bottom: 15px;
+}
+
+input.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Botones */
+button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

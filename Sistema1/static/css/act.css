@@ -1,0 +1,58 @@
+/* Centrar el formulario en la página */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado del formulario */
+h1 {
+    color: #000000;
+    margin-bottom: 30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+/* Estilo de los campos del formulario */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Estilo de los labels */
+label {
+    font-weight: bold;
+    color: #495057;
+}
+
+/* Estilo de los inputs */
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    font-size: 14px;
+}
+
+/* Estilo para el botón de guardar */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    background-color: #000000;
+    color: #fff;
+}
+
+/* Estilo para los enlaces */
+a.btn-link {
+    font-size: 14px;
+    color: #000000;
+    text-decoration: none;
+}
+

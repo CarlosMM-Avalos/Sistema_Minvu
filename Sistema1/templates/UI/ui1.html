@@ -1,0 +1,43 @@
+{% extends "UI/base.html" %}
+
+{% block content %}
+
+<style>
+
+
+    
+</style>
+<div class="container mt-5">
+
+    
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>Historial de Convenios</h3>
+        </div>
+        <div class="card-body">
+            {% if historial %}
+                <ul class="list-group">
+                    {% for item in historial %}
+                        <li class="list-group-item mb-3">
+                            <div class="d-flex justify-content-between">
+                                <span class="fw-bold text-primary">Fecha:</span> 
+                                <span>{{ item.fecha_modificacion }}</span>
+                            </div>
+                            <div class="mt-2">
+                                <span class="fw-bold">Nombre:</span> {{ item.nombre }} <br>
+                                <span class="fw-bold">Descripción:</span> {{ item.descripcion }} <br>
+                                <span class="fw-bold">Total:</span> ${{ item.total }} <br>
+                                {% if item.documento %}
+                                    <a href="{{ item.documento.url }}" target="_blank" class="btn btn-sm btn-outline-primary mt-2">Ver Documento</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-center text-muted">No hay cambios registrados.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,169 @@
+{% extends "UI/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Bootstrap CSS link -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktUqb9K2Q7Zt27H73uV+eI1JtG/M4x4xBvryhGK8n" crossorigin="anonymous">
+
+<!-- Font Awesome CSS for Icons -->
+ <!-- Custom CSS -->
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
+<!-- Content -->
+<div class="container-fluid mt-4">
+    {% for i in programas %}
+    <!-- Breadcrumb -->
+    <h6 class="ms-4">Inicio / Programas /{{ i.nombre }}  </h6>
+    <!-- Title -->
+    
+
+    <h3 class="ms-4 mt-5">{{ i.nombre }}</h3>
+    
+    
+    
+    
+    <!-- Description -->
+    <p class="mx-5">{{ i.descripcion }}</p>
+        
+        <hr>
+        
+        {% endfor %}
+
+    <!-- Button and Search Form -->
+    <div class="d-flex justify-content-between align-items-center px-4">
+        <!-- Add Municipality Button -->
+        <a class="btn btn-light" href="{% url 'Agregar_Mun' %}"><i class="fas fa-plus"></i> Agregar Municipio</a>
+        
+        <!-- Search Form -->
+        <form class="d-flex" role="search" method="get">
+                <input class="form-control me-2" type="search" placeholder="Buscar" name="buscar" aria-label="Search">
+            <button class="btn btn-outline-dark" type="submit"><i class="fas fa-search"></i> <!-- Ícono de búsqueda --></button>
+        </form>
+    </div>
+    
+    <!-- Municipios Table -->
+    <div class="row mt-3">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                    <thead class="text-center">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>RUT</th>
+                            <th>Cuenta</th>
+                            <th>Detalles</th>
+                            <th>Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if municipios %}
+                            {% for m in municipios %}
+                            <tr>
+                                <td>{{ m.nombre }}</td>
+                                <td>{{ m.rut }}</td>
+                                <td>{{ m.cuenta }}</td>
+                                <td class="text-center">
+                                    <a class="btn btn-link text-primary" href="{% url 'md' id=m.id %}" title="Ver detalles">
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{% url 'actualizar_Mun' id=m.id %}" class="btn btn-link text-warning" title="Actualizar">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <!-- <a href="{% url 'delete_mun' id=m.id %}" class="btn btn-link text-danger" title="Eliminar" onclick="return confirm('¿Estás seguro de eliminar este municipio?');">
+                                        <i class="bi bi-trash"></i>
+                                    </a> -->
+
+                                    <a href="#"   class="btn btn-link text-danger"    title="Eliminar"    onclick="confirmDelete('{% url 'delete_mun' id=m.id %}')">
+                                        <i class="bi bi-trash"></i>
+                                      </a>  
+ 
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center">No se encuentran municipios</td>
+                            </tr>
+                        {% endif %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Paginación -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    {% if municipios.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ municipios.previous_page_number }}" aria-label="Anterior">
+                            Anterior
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Anterior</span>
+                    </li>
+                    {% endif %}
+
+                    {% for num in municipios.paginator.page_range %}
+                    <li class="page-item {% if municipios.number == num %}active{% endif %}">
+                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% endfor %}
+
+                    {% if municipios.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ municipios.next_page_number }}" aria-label="Siguiente">
+                            Siguiente
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">Siguiente</span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>  
+
+
+</div>
+
+
+<script>
+    function confirmDelete(deleteUrl) {
+      Swal.fire({
+        title: '¿Estás seguro?',
+        text: "Esta acción no se puede deshacer.",
+        icon: 'warning', // Ícono de advertencia
+        showCancelButton: true, // Botón de cancelar
+        confirmButtonColor: '#d33', // Color del botón de confirmar
+        cancelButtonColor: '#6c757d', // Color del botón de cancelar
+        confirmButtonText: 'Sí, eliminar',
+        cancelButtonText: 'Cancelar',
+        backdrop: true, // Fondo semi-transparente
+        allowOutsideClick: false, // Desactiva clics fuera del modal
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Redirige al enlace de eliminación
+          window.location.href = deleteUrl;
+        }
+      });
+    }
+  </script>
+  
+  
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% endblock %}

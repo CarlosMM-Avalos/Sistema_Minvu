@@ -1,0 +1,173 @@
+{% extends "UI/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/ui4.css' %}">
+    <!-- Agregar enlace a Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEJx3+T0uD4g9z4tC6oM2rT5BzvH1r4WjI5dfK3ZxmkE2FhPrYZnG5e7fiXza" crossorigin="anonymous">
+</head>
+<style>
+
+  /* Estilo global para el formulario */
+body {
+  font-family: 'Georgia', Times, serif;
+  background-color: #f8f9fa; /* Fondo claro para la página */
+}
+
+/* Estilos para el título principal */
+h1 {
+  font-size: 2.5rem;
+  color: #343a40; /* Título en color oscuro */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Estilo para los grupos de formulario */
+.nice-form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Personalización de los campos de entrada */
+.form-control {
+  border: 2px solid #ced4da;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+/* Cambio de color del borde al enfocar un campo */
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.25rem rgba(38, 143, 255, 0.25);
+}
+
+/* Estilo del botón de agregar usuario */
+button[type="submit"] {
+  background-color: #838384; /* Color de fondo azul */
+  color: white; /* Color del texto */
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Cambio de color del botón al pasar el mouse */
+button[type="submit"]:hover {
+  background-color: #0a0f16;
+}
+
+/* Estilo para las etiquetas del formulario */
+.form-label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #495057; /* Color oscuro para las etiquetas */
+}
+
+/* Ajuste en la disposición de los campos del formulario */
+.container {
+  max-width: 600px; /* Ancho máximo para el formulario */
+  margin: 0 auto; /* Centrado horizontal */
+  padding: 20px;
+  background-color: #ffffff; /* Fondo blanco para el formulario */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Espaciado entre los elementos del formulario */
+.nice-form-group input {
+  width: 100%;
+}
+
+/* Estilo para los íconos dentro del título */
+h1 svg {
+  margin-right: 10px;
+  vertical-align: middle;
+  fill: #007bff;
+}
+
+/* Estilo para el fondo del formulario */
+section {
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+</style>
+<form action="{% url 'Agregar_Mun' %}" method="post">
+  {% csrf_token %}
+
+  <input type="hidden" name="next" value="{% url 'dprogramas' programa_id %}">
+
+  <section class="container mt-5">
+      <div class="href-target" id="structure"></div>
+      <h1 class="mb-4">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers">
+              <polygon points="12 2 2 7 12 12 22 7 12 2" />
+              <polyline points="2 17 12 22 22 17" />
+              <polyline points="2 12 12 17 22 12" />
+          </svg>
+          Municipios
+      </h1>
+
+      <div class="form-group">
+          <label for="municipio">Programa</label>
+          <select name="programa" id="programa" class="form-control" required>
+              {% for p in programa %}
+                <option value="{{ p.id }}" {% if p.id == programa_id %}selected{% endif %}>{{ p.nombre }}</option>
+              {% endfor %}
+          </select>
+      </div>
+
+      <div class="nice-form-group mb-3">
+          <label for="nombre" class="form-label">Nombre Municipio</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Caldera" required>
+      </div>
+
+      <div class="nice-form-group mb-3">
+          <label for="rut" class="form-label">Rut Municipio</label>
+          <input type="text" class="form-control" id="rut" name="rut" placeholder="10.123.123-2" required>
+      </div>
+
+      <div class="nice-form-group mb-3">
+          <label for="cuenta" class="form-label">Cuenta Municipal</label>
+          <input type="text" class="form-control" id="cuenta" name="cuenta" placeholder="123456789" required>
+      </div>
+
+
+      <!-- Campo: tcuenta -->
+    <div class="form-group">
+      <label for="banco">Banco</label>
+      <select name="tcuenta" id="tcuenta" class="form-control">
+          <option value="" disabled selected>Seleccione un tipo de cuenta</option>
+          {% for key, value in tcuenta %}
+          <option value="{{ key }}">{{ value }}</option>
+          {% endfor %}
+      </select>
+      </div>
+
+       <!-- Campo: Banco -->
+       <div class="form-group">
+        <label for="banco">Banco</label>
+        <select name="banco" id="banco" class="form-control">
+            <option value="" disabled selected>Seleccione un banco</option>
+            {% for key, value in bancos %}
+            <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    
+      
+
+      <div class="d-flex justify-content-center">
+          <button type="submit" name="submit" class="btn btn-secondary">Confirmar Municipio</button>
+      </div>
+  </section>
+</form>
+
+
+{% endblock %}

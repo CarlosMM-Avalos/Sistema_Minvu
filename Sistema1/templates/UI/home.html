@@ -1,0 +1,83 @@
+{% extends "UI/base.html" %}
+{% load static %}
+{% block content %}
+
+<head>
+    <link rel="stylesheet" href="{% static 'css/ui2.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* Estilo para ocultar inicialmente el párrafo */
+        .card p, .card button {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        /* Mostrar el párrafo y el botón al pasar el mouse sobre la tarjeta */
+        .card:hover p, .card:hover button {
+            opacity: 1;
+        }
+
+        /* Para mejorar el diseño general de las tarjetas */
+        .card {
+            position: relative;
+            overflow: hidden;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card img {
+            width: 100%;
+            height: 325px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<div class="container">
+    <div class="dashboard">
+        <!-- Tarjeta azul -->
+        <div class="card blue">
+            <img src="{%static 'img/PPL.png'%}" alt="">
+            <p>PROGRAMA PEQUEÑAS LOCALIDADES</p>
+            <a href="">
+                <button class="btn btn-outline-primary" style="color: black;">
+                    <i class="bi bi-arrow-right"></i> Ver más
+                </button>
+            </a>
+        </div>
+
+        <!-- Tarjeta verde -->
+        <div class="card green">
+            <img src="{%static 'img/QMB.png'%}" alt="">
+            <p>PROGRAMA BARRIOS</p>
+            <a href="">
+                <button class="btn btn-outline-success" style="color: black;">
+                    <i class="bi bi-arrow-right"></i> Ver más
+                </button>
+            </a>
+        </div>
+
+        <!-- Tarjeta amarilla -->
+        <div class="card yellow">
+            <img src="{%staitc 'img/APC.png'%}" alt="">
+            <p>PROGRAMA ASENTAMIENTOS PRECARIOS</p>
+            <a href="">
+                <button class="btn btn-outline-warning" style="color: black;">
+                    <i class="bi bi-arrow-right"></i> Ver más
+                </button>
+            </a>
+        </div>
+
+        <br>
+
+        
+    </div>
+</div>
+
+<hr>
+
+<h1>Dashboard</h1>
+
+
+
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "UI/base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/act.css' %}">
+    <!-- Asegúrate de tener Font Awesome cargado -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Asegúrate de que el formulario esté desplazado hacia arriba */
+        .form-container {
+            margin-top: -50px; /* Ajusta este valor para mover el formulario más arriba */
+            padding-top: 20px; /* Espacio superior adicional si lo necesitas */
+        }
+        .form-container h1 {
+            margin-bottom: 30px; /* Espacio entre el título y los campos */
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<!-- Formulario con clase container para reducir el tamaño y centrarlo -->
+<div class="container mt-5" style="margin-top: -45px;">
+    <form method="POST" enctype="multipart/form-data" class="form-container">
+       {% csrf_token %}
+       <h1 class="text-center mb-4"><i class="fas fa-handshake"></i> Actualizar Convenio</h1>
+
+       <!-- Campo de Nombre -->
+       <div class="form-group">
+           <label for="nombre">Nombre:</label>
+           <input type="text" name="nombre" id="nombre" value="{{ convenio.nombre }}" class="form-control" required>
+       </div>
+
+       <!-- Campo de Descripción -->
+       <div class="form-group">
+           <label for="descripcion">Descripción:</label>
+           <input type="text" name="descripcion" id="descripcion" value="{{ convenio.descripcion }}" class="form-control" required>
+       </div>
+
+       <!-- Campo de resoluciom -->
+       <div class="form-group">
+        <label for="descripcion">Número de Resolución:</label>
+        <input type="text" name="res" id="res" value="{{ convenio.res }}" class="form-control" required>
+    </div>
+   <!-- Campo de fecha -->
+    <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="date" name="fecha" id="fecha" value="{{ convenio.fecha|date:'Y-m-d' }}" class="form-control" required>
+
+    </div>
+
+       <!-- Campo de localidades -->
+       <div class="form-group">
+        <label for="descripcion">Localidad:</label>
+        <input type="text" name="lcl" id="lcl" value="{{ convenio.lcl }}" class="form-control" required>
+    </div>
+
+       <!-- Campo de Total -->
+       <div class="form-group">
+           <label for="total">Total:</label>
+           <input type="number" name="total" id="total" value="{{ convenio.total }}" class="form-control" required>
+       </div>
+
+       <!-- Documento Actual -->
+       <div class="form-group">
+           <label>Documento Actual:</label>
+           {% if convenio.documento %}
+               <a href="{{ convenio.documento.url }}" target="_blank" class="btn btn-link"><i class="fas fa-download"></i></a>
+           {% else %}
+               <span>No hay archivo cargado.</span>
+           {% endif %}
+       </div>
+
+       <!-- Campo para cargar nuevo documento -->
+       <div class="form-group">
+           <label for="documento">Actualizar Documento:</label>
+           <input type="file" name="documento" id="documento" class="form-control">
+       </div>
+
+       <!-- Campo de Municipio -->
+       
+
+       <div class="form-group">
+        <label for="municipio">Municipio:</label>
+        <select name="municipio" id="municipio" class="form-control" required>
+            <option value="">Selecciona un municipio</option>
+            {% for municipio in municipios %}
+                <option value="{{ municipio.id }}" {% if municipio.id == convenio.municipio.id %}selected{% endif %}>
+                    {{ municipio.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+        </div>
+
+       
+
+       <!-- Botón de Guardar con ícono -->
+       <div class="text-center">
+           <button type="submit" class="btn btn-primary btn-lg">
+               <i class="fas fa-save"></i> Guardar
+           </button>
+       </div>
+    </form>
+</div>
+
+{% endblock %}
+
+
+
+<!-- <h3>Actualizar Municipio</h3>
+<form method="POST">
+   {% csrf_token %}
+   <label>Nombre:</label>
+   <input type="text" name="nombre" value="{{ convenio.nombre }}" required><br>
+   <label>Descripcion:</label>
+   <input type="text" name="descripcion" value="{{ convenio.descripcion }}" required><br>
+   <label>Total:</label>
+   <input type="number" name="total" value="{{ convenio.total }}" required><br>
+   <label>Documento:</label>
+   <input type="file" name="documento" value="{{ convenio.documento }}" required><br>
+   <label>Municipio:</label>
+   <input type="text" name="municipio" value="{{ convenio.municipio }}" required><br>
+   
+   <button type="submit">Guardar cambios</button>
+</form>
+ -->

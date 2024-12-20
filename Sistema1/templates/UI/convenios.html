@@ -1,0 +1,72 @@
+{% extends "UI/base.html" %}
+{% load static %}
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/cnv.css' %}">
+</head>
+
+<form class="mt-5" action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+<section class="container" style="margin-top: -70px;">
+        <div class="text-center">
+            <h1><i class="bi bi-file-earmark-text" style="margin-right: 10px;"></i>Convenios</h1>
+        </div>            
+
+        <div class="form-group">
+            <label for="nombre">Nombre convenio</label>
+            <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Convenio1" required />
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Descripción Convenio</label>
+            <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripción Convenio1" required />
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Número de Resolución</label>
+            <input type="number" name="res" id="res" class="form-control" placeholder="Descripción Convenio1" required />
+        </div>
+
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" name="fecha" id="fecha"  class="form-control" placeholder="Descripción Convenio1" required />
+        </div>
+
+        <div class="form-group">
+            <label for="descripcion">Localidad</label>
+            <input type="text" name="lcl" id="lcl" class="form-control" placeholder="Descripción Convenio1" required />
+        </div>
+ 
+        <div class="form-group">
+            <label for="total">Total Convenio</label>
+            <input type="number" name="total" id="total" class="form-control" placeholder="Monto Convenio ej: $100.000.000" required />
+        </div>
+
+        <div class="form-group">
+            <label for="documento">Documento convenio</label>
+            <input type="file" name="documento" id="documento" class="form-control-file" required />
+        </div>
+        
+        <div class="form-group">
+            <label for="municipio">Municipio</label>
+            <select name="municipio" id="municipio" class="form-control" required>
+                {% for mun in municipio %}
+                    <option value="{{ mun.id }}">{{ mun.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        
+
+        <div class="form-group text-center">
+            <button type="submit" name="submit" class="btn btn-primary"><i class="bi bi-plus"></i>Agregar Convenio</button>
+        </div>
+</section>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+{% endblock %}

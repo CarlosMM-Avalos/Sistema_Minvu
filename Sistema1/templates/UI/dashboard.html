@@ -1,0 +1,124 @@
+{% extends "UI/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+   
+
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="{% url 'dashboard2' %}" style="background-color: #4CAF50; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 8px; margin: 5px; font-size: 16px; transition: background-color 0.3s;">
+            GRAFICA 2
+        </a>
+        <a href="{% url 'dashboard3' %}" style="background-color: #2196F3; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 8px; margin: 5px; font-size: 16px; transition: background-color 0.3s;">
+            GRAFICA 3
+        </a>
+        <a href="{% url 'dashboard4' %}" style="background-color: #f44336; color: white; padding: 14px 20px; text-align: center; text-decoration: none; display: inline-block; border-radius: 8px; margin: 5px; font-size: 16px; transition: background-color 0.3s;">
+            GRAFICA 4
+        </a>
+    </div>
+    
+
+    
+    
+    <!-- Formulario para filtrar por mes y convenio -->
+    <form method="GET" action="">
+        <label for="mes">Selecciona un mes:</label>
+        <select name="mes_rendicion" id="mes">
+            <option value="">-- Todos los meses --</option>
+            <option value="enero" {% if mes_seleccionado == "enero" %}selected{% endif %}>Enero</option>
+            <option value="febrero" {% if mes_seleccionado == "febrero" %}selected{% endif %}>Febrero</option>
+            <option value="marzo" {% if mes_seleccionado == "marzo" %}selected{% endif %}>Marzo</option>
+            <option value="abril" {% if mes_seleccionado == "abril" %}selected{% endif %}>Abril</option>
+            <option value="mayo" {% if mes_seleccionado == "mayo" %}selected{% endif %}>Mayo</option>
+            <option value="junio" {% if mes_seleccionado == "junio" %}selected{% endif %}>Junio</option>
+            <option value="julio" {% if mes_seleccionado == "julio" %}selected{% endif %}>Julio</option>
+            <option value="agosto" {% if mes_seleccionado == "agosto" %}selected{% endif %}>Agosto</option>
+            <option value="septiembre" {% if mes_seleccionado == "septiembre" %}selected{% endif %}>Septiembre</option>
+            <option value="octubre" {% if mes_seleccionado == "octubre" %}selected{% endif %}>Octubre</option>
+            <option value="noviembre" {% if mes_seleccionado == "noviembre" %}selected{% endif %}>Noviembre</option>
+            <option value="diciembre" {% if mes_seleccionado == "diciembre" %}selected{% endif %}>Diciembre</option>
+        </select>
+
+        <label for="convenio">Selecciona un convenio:</label>
+        <select name="convenio" id="convenio">
+            <option value="">-- Todos los convenios --</option>
+            {% for convenio in convenios %}
+                <option value="{{ convenio.id }}" {% if convenio_seleccionado == convenio.id|stringformat:"s" %}selected{% endif %}>
+                    {{ convenio.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Filtrar</button>
+    </form>
+
+    <!-- Gráfico -->
+    <canvas id="conveniosChart" width="400" height="200"></canvas>
+
+    <script>
+        const ctx = document.getElementById('conveniosChart').getContext('2d');
+
+        // Datos de Python al JavaScript
+        const labels = {{ labels|safe }};
+        const dataTotal = {{ data_total|safe }};
+        const dataOperacional = {{ data_operacional|safe }};
+        const dataPersonal = {{ data_personal|safe }};
+        const dataInversion = {{ data_inversion|safe }};
+        const dataTotalConvenio = {{ data_total_convenio|safe }};
+
+        // Configuración del gráfico
+        const conveniosChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Total Gastos',
+                        data: dataTotal,
+                        backgroundColor: 'rgba(75, 192, 192, 0.6)'
+                    },
+                    {
+                        label: 'Gasto Operacional',
+                        data: dataOperacional,
+                        backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                    },
+                    {
+                        label: 'Gasto Personal',
+                        data: dataPersonal,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                    },
+                    {
+                        label: 'Gasto Inversión',
+                        data: dataInversion,
+                        backgroundColor: 'rgba(255, 206, 86, 0.6)'
+                    },
+                    {
+                        label: 'Total Convenio',
+                        data: dataTotalConvenio,
+                        backgroundColor: 'rgba(153, 102, 255, 0.6)'
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "UI/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<head>
+   <link rel="stylesheet" href="{% static 'css/act_cnv.css' %}">
+</head>
+<div class="container mt-5">
+    
+
+    <!-- Formulario dentro del contenedor -->
+      
+      <form method="POST" action="{% url 'actualizar_Mun' municipio.id %}">
+         {% csrf_token %}
+         <!-- Campo oculto para la URL de retorno -->
+         <input type="hidden" name="next" value="{% url 'dprogramas' municipio.programas.id %}">
+         
+         <h3 class="text-center mb-4">
+            <i class="fas fa-city"></i> Actualizar Municipio
+         </h3>
+         
+         <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" value="{{ municipio.nombre }}" required>
+         </div>
+      
+         <div class="mb-3">
+            <label for="rut" class="form-label">Rut:</label>
+            <input type="text" class="form-control" id="rut" name="rut" value="{{ municipio.rut }}" required>
+         </div>
+      
+         <div class="mb-3">
+            <label for="cuenta" class="form-label">Cuenta:</label>
+            <input type="text" class="form-control" id="cuenta" name="cuenta" value="{{ municipio.cuenta }}" required>
+         </div>
+      
+         <div class="mb-3">
+            <label for="banco" class="form-label">Banco:</label>
+            <select class="form-control" id="banco" name="banco" required>
+               {% for value, label in bancos %}
+                  <option value="{{ value }}" {% if value == municipio.banco %}selected{% endif %}>{{ label }}</option>
+               {% endfor %}
+           </select>
+         </div>
+
+         <div class="mb-3">
+            <label for="tcuenta" class="form-label">tcuenta:</label>
+            <select class="form-control" id="tcuenta" name="tcuenta" required>
+               {% for value, label in tcuenta %}
+                  <option value="{{ value }}" {% if value == municipio.tcuenta %}selected{% endif %}>{{ label }}</option>
+               {% endfor %}
+           </select>
+         </div>
+      </div>
+
+
+      
+      <button type="submit" class="btn btn-primary" style="max-width: 200px; display: block; margin: 0 auto;">
+         <i class="fas fa-save"></i> Guardar
+      </button>
+      </form>
+
+    </div>
+</div>
+
+{% endblock %}

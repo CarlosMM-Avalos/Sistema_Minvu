@@ -1,0 +1,236 @@
+{% extends "UI/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- agregar_reintegro.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Reintegro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        /* Estilo general */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        /* Etiquetas */
+        label {
+            font-size: 16px;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Estilo de los inputs y select */
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        input[type="date"]:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        button {
+            grid-column: span 2;
+            background-color: #0066cc;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #004c99;
+        }
+
+        /* Estilo para inputs de archivo */
+        input[type="file"] {
+            border: none;
+            padding: 5px;
+            background-color: #f4f7fc;
+        }
+
+        /* Adaptación para pantallas pequeñas */
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;
+            }
+
+            button {
+                grid-column: 1;
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Agregar Reintegro</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- Select de Convenio -->
+            <div class="form-group">
+                <label for="convenio">Convenio:</label>
+                <select name="convenio" id="convenio">
+                    <option value="" selected>Seleccione un convenio</option>
+                    {% for convenio in convenios %}
+                        <option value="{{ convenio.id }}">{{ convenio.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Fecha de Solicitud -->
+            <div class="form-group">
+                <label for="fecha_solicitud">Fecha de Solicitud:</label>
+                <input type="date" id="fecha_solicitud" name="fecha_solicitud" required>
+            </div>
+
+            <!-- Fecha de Aprobación -->
+            <div class="form-group">
+                <label for="fecha_aprobacion">Fecha de Aprobación:</label>
+                <input type="date" id="fecha_aprobacion" name="fecha_aprobacion" required>
+            </div>
+
+            <!-- Código de Referencia -->
+            <div class="form-group">
+                <label for="codigo_referencia">Código de Referencia:</label>
+                <input type="text" id="codigo_referencia" name="codigo_referencia" required>
+            </div>
+
+            <!-- Número de Oficio -->
+            <div class="form-group">
+                <label for="numero_oficio">Número de Oficio:</label>
+                <input type="number" id="numero_oficio" name="numero_oficio" required>
+            </div>
+
+            <!-- Fecha del Oficio -->
+            <div class="form-group">
+                <label for="fecha_oficio">Fecha del Oficio:</label>
+                <input type="date" id="fecha_oficio" name="fecha_oficio" required>
+            </div>
+
+            <!-- Número SIGFE -->
+            <div class="form-group">
+                <label for="numero_sigfe">Número SIGFE:</label>
+                <input type="number" id="numero_sigfe" name="numero_sigfe" required>
+            </div>
+
+            <!-- Fecha SIGFE -->
+            <div class="form-group">
+                <label for="fecha_sigfe">Fecha SIGFE:</label>
+                <input type="date" id="fecha_sigfe" name="fecha_sigfe" required>
+            </div>
+
+            <!-- Monto Entregado -->
+            <div class="form-group">
+                <label for="monto_entregado">Monto Entregado:</label>
+                <input type="number" id="monto_entregado" name="monto_entregado" required>
+            </div>
+
+            <!-- Monto a Reintegrar -->
+            <div class="form-group">
+                <label for="monto_reintegrar">Monto a Reintegrar:</label>
+                <input type="number" id="monto_reintegrar" name="monto_reintegrar" required>
+            </div>
+
+            <!-- Descripción -->
+            <div class="form-group">
+                <label for="descripcion">Descripción:</label>
+                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
+            </div>
+
+            <!-- Fecha Límite de Devolución -->
+            <div class="form-group">
+                <label for="fecha_limite_devolucion">Fecha Límite de Devolución:</label>
+                <input type="date" id="fecha_limite_devolucion" name="fecha_limite_devolucion" required>
+            </div>
+
+            <!-- Estado del Reintegro -->
+            <div class="form-group">
+                <label for="estado_reintegro">Estado del Reintegro:</label>
+                <select id="estado_reintegro" name="estado_reintegro" required>
+                    <option value="reintegrado">Reintegrado</option>
+                    <option value="sin_reintegrar">Sin Reintegrar</option>
+                    <option value="cancelado">Cancelado</option>
+                </select>
+            </div>
+
+            <!-- Documento -->
+            <div class="form-group">
+                <label for="documento">Documento:</label>
+                <input type="file" id="documento" name="documento">
+            </div>
+
+            <button type="submit">Agregar</button>
+        </form>
+    </div>
+</body>
+</html>
+
+{% endblock %}
